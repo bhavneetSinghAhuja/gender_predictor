@@ -7,14 +7,11 @@ def create_space(repo_id=None):
     
     token = os.getenv("HF_TOKEN")
     if not token:
-        token = input("Enter your Hugging Face API token: ").strip()
+        raise ValueError("Set HF_TOKEN environment variable: export HF_TOKEN='your-token'")
     login(token)
     
     api = HfApi()
-    
-    if not repo_id:
-        username = api.whoami(token)["name"]
-        repo_id = f"{username}/gender-predictor"
+    repo_id = "bhavneetsinghahuja/gender-predictor"
     
     print(f"Creating Space: {repo_id}")
     

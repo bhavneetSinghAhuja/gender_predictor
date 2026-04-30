@@ -4,7 +4,7 @@ import numpy as np
 from huggingface_hub import hf_hub_download
 import joblib
 
-REPO_ID = "gender-predictor"
+REPO_ID = "bhavneetsinghahuja/gender-predictor"
 
 model = joblib.load(hf_hub_download(repo_id=REPO_ID, filename="model.pkl"))
 label_encoder = joblib.load(hf_hub_download(repo_id=REPO_ID, filename="label_encoder.pkl"))

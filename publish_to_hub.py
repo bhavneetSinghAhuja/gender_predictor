@@ -4,20 +4,20 @@ import os
 import joblib
 
 REPO_NAME = "gender-predictor"
+USERNAME = "bhavneetsinghahuja"
 
 def publish_to_hub(repo_id=None):
     print("=== Gender Predictor - Hugging Face Publisher ===\n")
     
     token = os.getenv("HF_TOKEN")
     if not token:
-        token = input("Enter your Hugging Face API token: ").strip()
+        raise ValueError("Set HF_TOKEN environment variable: export HF_TOKEN='your-token'")
     login(token)
     
     api = HfApi()
     
     if not repo_id:
-        username = api.whoami(token)["name"]
-        repo_id = f"{username}/{REPO_NAME}"
+        repo_id = f"{USERNAME}/{REPO_NAME}"
     
     print(f"Creating/uploading to repository: {repo_id}\n")
     
@@ -27,7 +27,7 @@ def publish_to_hub(repo_id=None):
     except Exception as e:
         print(f"Repo error: {e}")
     
-    model_card = """---
+    model_card = f"""---
 license: mit
 tags:
 - gender-prediction
@@ -79,7 +79,7 @@ print(f"Gender: {{gender}}, Confidence: {{confidence:.1%}}")
 
 ## Interactive Demo
 
-Check out the [Gradio Space](https://huggingface.co/spaces/{username}/gender-predictor) for an interactive demo!
+Check out the [Gradio Space](https://huggingface.co/spaces/{USERNAME}/gender-predictor) for an interactive demo!
 """
     
     api.upload_file(

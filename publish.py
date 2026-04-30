@@ -11,12 +11,13 @@ def publish_all():
     
     token = os.getenv("HF_TOKEN")
     if not token:
-        token = input("Enter your Hugging Face API token: ").strip()
-    os.environ["HF_TOKEN"] = token
+        print("Error: Set HF_TOKEN environment variable first")
+        print("export HF_TOKEN='your-huggingface-token'")
+        return
     
     login(token)
     api = HfApi()
-    username = api.whoami(token)["name"]
+    username = "bhavneetsinghahuja"
     repo_id = f"{username}/gender-predictor"
     
     print("\n" + "-" * 50)
