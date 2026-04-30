@@ -60,8 +60,40 @@ gender_predictor/
 ├── data_generator.py    # Synthetic data generation
 ├── model.py             # Model training
 ├── evaluate.py          # Validation metrics
+├── app.py               # Gradio Space app
+├── publish.py           # Publish to HF (Model + Space)
+├── publish_to_hub.py    # Upload model to HF Hub
+├── create_space.py      # Deploy Gradio Space
 ├── requirements.txt     # Dependencies
+├── space_requirements.txt  # Space dependencies
 ├── README.md            # Documentation
 ├── data/                # Training/test datasets
 └── models/              # Saved model files
+
+## Publish to Hugging Face
+
+### Get API Token
+1. Go to https://huggingface.co/settings/tokens
+2. Create a new token (write access)
+3. Set environment variable: `export HF_TOKEN="your-token-here"`
+
+### Publish Model + Space (One Command)
+```bash
+.venv/bin/pip install huggingface_hub gradio
+.venv/bin/python publish.py
+```
+
+### Or Publish Separately
+```bash
+# Upload model to Hub only
+.venv/bin/python publish_to_hub.py
+
+# Deploy Space only
+.venv/bin/python create_space.py
+```
+
+This will:
+- Upload model and label encoder to Hugging Face Model Hub
+- Deploy interactive Gradio Space demo
+- Generate model card with usage examples
 ```
